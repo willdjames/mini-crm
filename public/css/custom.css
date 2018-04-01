@@ -1,0 +1,21 @@
+.required:after {
+	content:" *";
+	color: red;
+	font-weight: bold;
+}
+
+.listColumnActions {
+	list-style: none;
+}
+
+.listItemColumnActions {
+	display: inline;
+	margin-right: 10px;
+}
+
+.sizeIamge {
+	height: 100px;
+	width: 100px;
+}
+
+
