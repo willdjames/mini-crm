@@ -13,7 +13,7 @@ class CompaniesController extends Controller {
 
 
     public function __construct() {
-        $this->middleware(['auth', 'applyLocale']);
+        $this->middleware(['auth', 'applyLocale']); // Middleware 'applyLocale' para traduzir antes de renderizar a pagina
     }
 
 
@@ -48,7 +48,7 @@ class CompaniesController extends Controller {
                 
         $params = $request->except('action');
        
-        if( $request->file('logo') ){
+        if( $request->file('logo') ){ // Se falso, esta propriendade persiste NULL, se verdadeiro, presiste o path
             $params['logo'] = Storage::putFile('public', $request->file('logo')); // save and return the path
         }
         
@@ -77,7 +77,7 @@ class CompaniesController extends Controller {
 
         $company = Company::find($id);
         
-        if($company == null) {
+        if($company == null) { // Para que não retorne no final erro 500 - (digitando um ID invalido na URI) -, caso seja NULL.
             return redirect()->back();
         }
         

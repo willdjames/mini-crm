@@ -1,0 +1,3 @@
+Não pagar arquivo no_image.jpg, ele exibe caso não seja incluido uma imagem para empresa quando criada.
+
+Tks :)

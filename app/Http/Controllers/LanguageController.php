@@ -9,7 +9,7 @@ class LanguageController extends Controller {
     
     public function chooser($lang) {
 
-    	Session::put('locale', $lang);
+    	Session::put('locale', $lang); // Salva o idioma na sessão
     	
     	return redirect()->back();
     }

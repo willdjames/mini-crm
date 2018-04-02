@@ -14,7 +14,7 @@ class HomeController extends Controller {
      * @return void
      */
     public function __construct() {
-        $this->middleware(['auth', 'applyLocale']);
+        $this->middleware(['auth', 'applyLocale']);  // Middleware 'applyLocale' para traduzir antes de renderizar a pagina
     }
 
     /**
@@ -24,8 +24,8 @@ class HomeController extends Controller {
      */
     public function index() {
         
-        $allCompany  = Company::count();
-        $allEmployee = Employee::count();
+        $allCompany  = Company::count(); // Valor exibido no card da home page
+        $allEmployee = Employee::count(); // Valor exibido no card da home page
         
         return view('home', compact('allCompany', 'allEmployee'));
     }

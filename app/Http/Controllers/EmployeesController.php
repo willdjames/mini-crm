@@ -12,7 +12,7 @@ class EmployeesController extends Controller {
 
 
     public function __construct() {
-        $this->middleware(['auth', 'applyLocale']);
+        $this->middleware(['auth', 'applyLocale']);  // Middleware 'applyLocale' para traduzir antes de renderizar a pagina
     }
 
     /**
@@ -25,7 +25,7 @@ class EmployeesController extends Controller {
         $employees = DB::table('employees')
             ->leftjoin('companies', 'employees.comp_id', '=', 'companies.id')
             ->select('employees.*', 'companies.name')
-            ->paginate(10);
+            ->paginate(10); // LeftJoin paginado a cada 10 registros
 
         return view('employees.empRead', compact('employees'));
     }
@@ -37,6 +37,7 @@ class EmployeesController extends Controller {
      */
     public function create() {
 
+        // Array para popular com as empresas cadastradas na tag select na view
         $companies = DB::table('companies')->select('id', 'name')->orderBy('name')->get();
         
         return view('employees.empCreate', compact('companies'));
@@ -52,7 +53,7 @@ class EmployeesController extends Controller {
 
         $employee = $request->except('action');
 
-        if( $employee['comp_id'] == "0") $employee['comp_id'] = null;  
+        if( $employee['comp_id'] == "0") $employee['comp_id'] = null;  // Se nao for selecionado nenhuma empresa para o empregado
         
         Employee::create($employee);
 
@@ -79,8 +80,9 @@ class EmployeesController extends Controller {
 
         $employee = Employee::find($id);
 
-        if($employee == null) return redirect()->back();
+        if($employee == null) return redirect()->back(); // Caso seja digitado um ID invalido na URI
 
+        // Array para popular com as empresas cadastradas na tag select na view
         $companies = DB::table('companies')->select('id', 'name')->orderBy('name')->get();
         
         return view('employees.empUpdate', compact('employee', 'companies'));
@@ -94,10 +96,11 @@ class EmployeesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
+
         $employee = Employee::find($id);
         $params = $request->except('action');
         
-        if( $params['comp_id'] == "0") $params['comp_id'] = null;
+        if( $params['comp_id'] == "0") $params['comp_id'] = null; // Se nao for selecionado nenhuma empresa para o empregado
         
         $employee->update($params);
 
@@ -111,6 +114,7 @@ class EmployeesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
+        
         $employee = Employee::find($id);
         $employee->delete();
 

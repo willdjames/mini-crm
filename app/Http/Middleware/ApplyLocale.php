@@ -17,7 +17,7 @@ class ApplyLocale {
 
         app()->setlocale( Session::get('locale') ); //Apply the locale with locale value store in session
 
-        return $next($request);
+        return $next($request); // Após pegar o idioma na sessão, retorna com o response da rota
     }
 
 }

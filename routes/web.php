@@ -20,7 +20,7 @@ Route::get('/language/{lang}', 'LanguageController@chooser');
 
 
 /**
- * Comapnies routes
+ * Companies routes
  */
 Route::group(['prefix' => 'companies'], function() {
     
@@ -61,5 +61,4 @@ Route::group(['prefix' => 'employees'], function() {
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index');
